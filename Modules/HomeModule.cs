@@ -12,16 +12,24 @@ namespace TamagotchiList
         return View["index.cshtml"];
       };
       Get["/Tamagotchis"] = _ => {
-        List<Tamagotchi> allTamagotchis = Tamagotchi.GetAll();
+        Dictionary<string, Tamagotchi> allTamagotchis = Tamagotchi.GetAll();
         return View["Tamagotchis.cshtml", allTamagotchis];
       };
       Get["/Tamagotchis/new"] = _ =>{
         return View["Tamagotchi_form.cshtml"];
       };
       Post["/Tamagotchis"] = _ =>{
-        Tamagotchi newTamagotchi = new Tamagotchi (Request.Form["new-Tamagotchi"]);
-        List<Tamagotchi> allTamagotchis = Tamagotchi.GetAll();
-        return View["Tamagotchis.cshtml", allTamagotchis];
+        string word = Request.Form["new-Tamagotchi"];
+
+        Dictionary<string, Tamagotchi> allTamagotchis = Tamagotchi.GetAll();
+        if(allTamagotchis.ContainsKey(word)){
+          return View["/wrong.cshtml"];
+        }
+        else{
+          Tamagotchi newTamagotchi = new Tamagotchi (word);
+          return View["Tamagotchis.cshtml", allTamagotchis];
+        }
+
       };
       Get["/Tamagotchis/{id}"] = parameters => {
         Tamagotchi tamagotchi = Tamagotchi.Find(parameters.id);
@@ -44,9 +52,9 @@ namespace TamagotchiList
       };
       Post["/TamagotchiTime"] = parameters => {
         //Tamagotchi tamagotchi = Tamagotchi.Find(parameters.id);
-        List<Tamagotchi> allTamagotchis = Tamagotchi.GetAll();
+        Dictionary<string, Tamagotchi> allTamagotchis = Tamagotchi.GetAll();
         foreach(var tama in allTamagotchis){
-          tama.TimePass();
+          tama.Value.TimePass();
         }
 
         return View["/Tamagotchis.cshtml", allTamagotchis];

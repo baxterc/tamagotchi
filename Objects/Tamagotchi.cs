@@ -10,16 +10,17 @@ namespace TamagotchiList
     private int _tiredness;
     private int _id;
     private bool _dead;
-    private static List<Tamagotchi> _tamagotchis = new List<Tamagotchi> {};
+    private static Dictionary<string, Tamagotchi> _tamagotchis = new Dictionary<string, Tamagotchi>(){};
+    // private static List<Tamagotchi> _tamagotchis = new List<Tamagotchi> {};
 
-    public Tamagotchi ( string name)
+    public Tamagotchi (string name)
     {
       _name = name;
       _hunger = 1;
       _entertainment = 1;
       _tiredness = 1;
       _dead = false;
-      _tamagotchis.Add(this);
+      _tamagotchis.Add(this._name, this);
       _id = _tamagotchis.Count;
     }
     public string GetName()
@@ -66,12 +67,15 @@ namespace TamagotchiList
     {
       return _id;
     }
-    public static List<Tamagotchi> GetAll()
+    public static Dictionary<string, Tamagotchi> GetAll()
     {
       return _tamagotchis;
     }
-    public static Tamagotchi Find(int searchId){
-      return _tamagotchis[searchId-1];
+    // public static Tamagotchi Find(int searchId){
+    //   return _tamagotchis[searchId-1];
+    // }
+    public static Tamagotchi Find(string tama){
+      return _tamagotchis[tama];
     }
     public static void ClearAll()
     {

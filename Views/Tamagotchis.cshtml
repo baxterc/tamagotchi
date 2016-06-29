@@ -2,7 +2,7 @@
 <ul>
   @foreach (var Tamagotchi in Model)
   {
-    <li><a href='/Tamagotchis/@Tamagotchi.GetId()'>@Tamagotchi.GetName()</a></li>
+    <li><a href='/Tamagotchis/@Tamagotchi.Value.GetName()'>@Tamagotchi.Value.GetName()</a></li>
   }
 </ul>
 <form action="/TamagotchiTime" method="post">
