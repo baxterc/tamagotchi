@@ -1,0 +1,11 @@
+<h1>Tamagotchi</h1>
+<ul>
+  @foreach (var Tamagotchi in Model)
+  {
+    <li><a href='/Tamagotchis/@Tamagotchi.GetId()'>@Tamagotchi.GetName()</a></li>
+  }
+</ul>
+<form action="/TamagotchiTime" method="post">
+  <button type="click">let time pass</button>
+</form>
+<a href="Tamagotchis/new">Add Tamagotchi</a>

@@ -1,0 +1,24 @@
+<h1>@Model.GetName()</h1>
+@if(Model.GetDead() == true){
+  <p>your tamagotchi is dead</p>
+}
+else{
+  <p>@Model.GetHunger()</p>
+  <p>@Model.GetTiredness()</p>
+  <p>@Model.GetEntertainment()</p>
+}
+
+
+<form action="/TamagotchiFeed/@Model.GetId()" method="post">
+  <button type="click">feed</button>
+</form>
+<form action="/TamagotchiSleep/@Model.GetId()" method="post">
+  <button type="click">sleep</button>
+</form>
+<form action="/TamagotchiPlay/@Model.GetId()" method="post">
+  <button type="click">Play</button>
+</form>
+
+
+<a href='/Tamagotchis/new'>Add another Tamagotchi</a>
+<a href="/Tamagotchis">View all Tamagotchis</a>
